@@ -25,21 +25,19 @@ To run the project, make sure to have the following dependencies installed: pip 
 5. Sentiment Prediction: The script also allows the user to input a new movie review and predicts whether the review is positive or negative.
 
 ### Example
-$ python movie_reviews1.py
-Accuracy: 85.23%
+![Accuracy: 0.82004
 Classification Report:
                precision    recall  f1-score   support
 
-           0       0.84      0.86      0.85     12500
-           1       0.85      0.84      0.85     12500
+           0       0.79      0.87      0.83     12500
+           1       0.85      0.77      0.81     12500
 
-    accuracy                           0.85     25000
-   macro avg       0.85      0.85      0.85     25000
-weighted avg       0.85      0.85      0.85     25000
+    accuracy                           0.82     25000
+   macro avg       0.82      0.82      0.82     25000
+weighted avg       0.82      0.82      0.82     25000
 
-Enter movie review: "This movie was fantastic! I loved it."
-Predicted sentiment for the new review: positive
-
+Enter movie review: This movie was fantastic! I loved it
+Predicted sentiment for the new review: positive](movie_reviews1 image.png)
 <br/>
 
 ## movie_reviews2.py
@@ -118,5 +116,5 @@ This project demonstrates the application of various machine learning techniques
     * Hyperparameter Tuning: Fine-tuning model parameters to optimize performance.
     * Model Ensemble: Combining predictions from multiple models to enhance accuracy.
     * Data Augmentation: Expanding the dataset through techniques like synonym replacement to increase robustness.
-    
+
 This project serves as a foundational exploration into sentiment analysis, showcasing the potential of machine learning in understanding and processing human language. Further enhancements could lead to even more accurate and insightful sentiment predictions.
