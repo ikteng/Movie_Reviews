@@ -39,6 +39,7 @@ Classification Report:
 weighted avg       0.85      0.85      0.85     25000
 Enter movie review: "This movie was fantastic! I loved it."
 Predicted sentiment for the new review: positive
+```
 
 <br/>
 
@@ -62,11 +63,13 @@ pip install numpy pandas tensorflow
 5. Sentiment Prediction: The script also allows the user to input a new movie review and predicts whether the review is positive or negative.
 
 ### Example
+```bash
 $ python movie_reviews2.py
 Accuracy: 0.8425
 
 Enter movie review: "This movie was fantastic! I loved it."
 Predicted sentiment for the new review: Positive
+```
 
 <br/>
 
@@ -91,6 +94,7 @@ pip install numpy pandas scikit-learn tensorflow matplotlib
 5. Sentiment Prediction: The script allows the user to input a new movie review and predicts whether the review is positive or negative.
 
 ### Example
+```bash
 $ python movie_reviews3.py
 Epoch 1/5
 625/625 [==============================] - 7s 10ms/step - loss: 0.4968 - accuracy: 0.7444 - val_loss: 0.3297 - val_accuracy: 0.8604
@@ -107,6 +111,7 @@ Accuracy: 0.8492000102996826
 
 Enter movie review: "This movie was terrible. The plot made no sense, and the characters were awful."
 Predicted sentiment for the new review: negative
+```
 
 <br/>
 
