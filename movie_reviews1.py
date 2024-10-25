@@ -1,66 +1,68 @@
-# imported libraries
+import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.pipeline import make_pipeline
-from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 import string
+import tensorflow as tf
 
-# function to load the data from the file_path as DataFrame
-def load_data(file_path):
-    return pd.read_csv(file_path)
+# Load the IMDb dataset
+def load_imdb_data():
+    (X_train, y_train), (X_test, y_test) = tf.keras.datasets.imdb.load_data(num_words=10000)
+    # Decode reviews back to text format
+    word_index = tf.keras.datasets.imdb.get_word_index()
+    index_word = {index + 3: word for word, index in word_index.items()}
+    # Adjusting the index to account for padding and unknown tokens
+    index_word[0], index_word[1], index_word[2] = '<PAD>', '<START>', '<UNK>'
+    X_train = [' '.join([index_word[i] for i in review]) for review in X_train]
+    X_test = [' '.join([index_word[i] for i in review]) for review in X_test]
+    return X_train, X_test, y_train, y_test
 
-# function to preprocess text
-def preprocess_text(text, stop_words):
+# Function to preprocess text
+def preprocess_text(text):
     # Remove punctuation and convert to lowercase
     text = ''.join([char for char in text if char not in string.punctuation]).lower()
-    # Tokenize and remove stopwords
-    words = [word for word in text.split() if word not in stop_words]
-    return ' '.join(words)
+    return text
 
-# function to train model
+# Function to train the model
 def train_model(X_train, y_train):
     model = make_pipeline(CountVectorizer(), MultinomialNB())
     model.fit(X_train, y_train)
     return model
 
-# function to evaluate model
+# Function to evaluate the model
 def evaluate_model(model, X_test, y_test):
     predictions = model.predict(X_test)
     accuracy = accuracy_score(y_test, predictions)
     report = classification_report(y_test, predictions)
     return accuracy, report
 
-# main method
+# Main method
 if __name__ == "__main__":
-    # get dataframe of csv file
-    file_path = 'movie_reviews\IMDB Dataset.csv'
-    df = load_data(file_path)
+    # Load IMDb data
+    X_train, X_test, y_train, y_test = load_imdb_data()
 
     # Preprocess the text data
-    stop_words = set(ENGLISH_STOP_WORDS) # define the stopwords
-    # preprocesses each text review in the 'review' column of the DataFrame by applying the preprocess_text function, and the preprocessed reviews are then stored back in the 'review' column of the DataFrame. 
-    df['review'] = df['review'].apply(lambda x: preprocess_text(x, stop_words)) 
-
-    # Split the dataset into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(df['review'], df['sentiment'], test_size=0.2, random_state=42)
-
+    X_train = [preprocess_text(review) for review in X_train]
+    X_test = [preprocess_text(review) for review in X_test]
+    
     # Train the model
     model = train_model(X_train, y_train)
 
     # Evaluate the model
     accuracy, report = evaluate_model(model, X_test, y_test)
 
-    # print accuracy
+    # Print accuracy
     print(f'Accuracy: {accuracy}')
-    # print report
+    # Print report
     print('Classification Report:\n', report)
 
     # Predict sentiment for a new review
     new_review = input("Enter movie review: ")
-    new_review = preprocess_text(new_review, stop_words)
+    new_review = preprocess_text(new_review)
     prediction = model.predict([new_review])[0]
 
-    print(f'Predicted sentiment for the new review: {prediction}')
+    sentiment = "positive" if prediction == 1 else "negative"
+    print(f'Predicted sentiment for the new review: {sentiment}')
