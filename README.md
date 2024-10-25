@@ -25,19 +25,7 @@ To run the project, make sure to have the following dependencies installed: pip 
 5. Sentiment Prediction: The script also allows the user to input a new movie review and predicts whether the review is positive or negative.
 
 ### Example
-![Accuracy: 0.82004
-Classification Report:
-               precision    recall  f1-score   support
-
-           0       0.79      0.87      0.83     12500
-           1       0.85      0.77      0.81     12500
-
-    accuracy                           0.82     25000
-   macro avg       0.82      0.82      0.82     25000
-weighted avg       0.82      0.82      0.82     25000
-
-Enter movie review: This movie was fantastic! I loved it
-Predicted sentiment for the new review: positive](movie_reviews1 image.png)
+![classification report & sentiment prediction](movie_reviews1 image.png)
 <br/>
 
 ## movie_reviews2.py
